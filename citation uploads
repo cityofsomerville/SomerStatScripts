@@ -1,0 +1,36 @@
+###Script to download T&P citation data from eventual FTP and upload to Socrata
+
+
+##Placeholder -- downloading from FTP 
+##Placholder -- upload to Socrata
+
+###Start here
+
+#setwd("C:/Users/presentation/Desktop")
+#Install libraries 
+
+install.packages("dplyr")
+install.packages("RCurl")
+install.packages("tidyr")
+install.packages("httr") 
+
+
+library(RCurl)
+library(dplyr)
+library(tidyr)
+library(httr) # Upload to Socrata
+
+##If using Xerox data set directly, must check headers to avoid combined column titles, as their table may not be labeled correctly  
+##Use read.delim to load data instead of read.tble, since it is a ~ separated text file
+t <- read.delim("./somerville-tickets.txt", header=TRUE, sep="~") # loads data and calls it veriable t 
+
+##write to a CSV file
+write.csv(t, "./Bananas.csv", row.names = FALSE) # because bananas 
+
+##Select columns we want to feature, and eliminate private data
+t_sweep_web <- filter(t,VIO.DESC == "OBSTRUCTING STREET S")%>% #WORKINPROGRESS
+  filter(PAY.TYPE == "CREDIT") 
+
+#Select columns I want 
+t_web <- filter(t,PAY.TYPE == "WEB ")
+
