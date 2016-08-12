@@ -2,16 +2,17 @@
 ## It is expected that this will be set up through Windows Task Scheduler to run Monthly, the open checkbook data is posted to the SomerStat Data drive monthly on the 5th of the month.
 
 ## Set working Directory ##
-setwd("C:/Users/mmastrobuoni.CH2SOM-MMASTROB/Documents/GitHub/Somerville_Data_Pipes")
+setwd("//fileshare1/Departments2/Somerstat Data/IT/Open Checkbook Data")
 
 # This pulls in the credentials you need
-source("./config.R")
+source("C:/Users/mmastrobuoni.CH2SOM-MMASTROB/Documents/GitHub/Somerville_Data_Pipes/config.R")
 
 ## Load Packages
 library(httr) #for PUT function
+library(xlsx) #for loading .xls files
 
 ## Load open checkbook data from the SomerStat Data drive and write locally (if necessary) 
-#checkbook <- read.csv("//fileshare1/Departments2/Somerstat Data/IT/csv_opencheckbook_2016.csv")
+checkbook <- read.xlsx("./csv_opencheckbook_2017.xls", header = TRUE)
 #write.csv(checkbook, file = "checkbook.csv")
 
 ## upload to Socrata
